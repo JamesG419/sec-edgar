@@ -136,7 +136,7 @@ class SecCrawler(object):
         else:
             return cik
 
-    def _fetch_report(self, company_code, cik, priorto, count, filing_type):
+    def _fetch_report(self, company_code, cik, priorto, count, filing_type, output):
         """Fetch filings.
 
         Args:
@@ -160,7 +160,7 @@ class SecCrawler(object):
 
         # generate the url to crawl
         base_url = "http://www.sec.gov/cgi-bin/browse-edgar"
-        params = {'action': 'getcompany', 'owner': 'exclude', 'output': 'xml',
+        params = {'action': 'getcompany', 'owner': 'exclude', 'output': output,
                   'CIK': cik, 'type': filing_type, 'dateb': priorto, 'count': count}
         print("started {filing_type} {company_code}".format(
             filing_type=filing_type, company_code=company_code))
@@ -180,7 +180,7 @@ class SecCrawler(object):
 
         print("Successfully downloaded all the files")
 
-    def filing_10Q(self, company_code, cik, priorto, count):
+    def filing_10Q(self, company_code, cik, priorto, count, output = 'xml'):
         """Fetch 10Q reports before priorto date.
 
         Args:
@@ -198,9 +198,9 @@ class SecCrawler(object):
         Returns:
           None
         """
-        self._fetch_report(company_code, cik, priorto, count, '10-Q')
+        self._fetch_report(company_code, cik, priorto, count, '10-Q', output)
 
-    def filing_10K(self, company_code, cik, priorto, count):
+    def filing_10K(self, company_code, cik, priorto, count, output = 'xml'):
         """Fetch 10K reports before priorto date.
 
         Args:
@@ -218,9 +218,9 @@ class SecCrawler(object):
         Returns:
           None
         """
-        self._fetch_report(company_code, cik, priorto, count, '10-K')
+        self._fetch_report(company_code, cik, priorto, count, '10-K', output)
 
-    def filing_8K(self, company_code, cik, priorto, count):
+    def filing_8K(self, company_code, cik, priorto, count, output = 'xml'):
         """Fetch 8K reports before priorto date.
 
         Args:
@@ -238,9 +238,9 @@ class SecCrawler(object):
         Returns:
           None
         """
-        self._fetch_report(company_code, cik, priorto, count, '8-K')
+        self._fetch_report(company_code, cik, priorto, count, '8-K', output)
 
-    def filing_13F(self, company_code, cik, priorto, count):
+    def filing_13F(self, company_code, cik, priorto, count, output = 'xml'):
         """Fetch 13F reports before priorto date.
 
         Args:
@@ -258,9 +258,9 @@ class SecCrawler(object):
         Returns:
           None
         """
-        self._fetch_report(company_code, cik, priorto, count, '13-F')
+        self._fetch_report(company_code, cik, priorto, count, '13-F', output)
 
-    def filing_SD(self, company_code, cik, priorto, count):
+    def filing_SD(self, company_code, cik, priorto, count, output = 'xml'):
         """Fetch SD reports before priorto date.
 
         Args:
@@ -278,9 +278,9 @@ class SecCrawler(object):
         Returns:
           None
         """
-        self._fetch_report(company_code, cik, priorto, count, 'SD')
+        self._fetch_report(company_code, cik, priorto, count, 'SD', output)
 
-    def filing_4(self, company_code, cik, priorto, count):
+    def filing_4(self, company_code, cik, priorto, count, output = 'xml'):
         """Fetch '4' reports before priorto date.
 
         Args:
@@ -298,4 +298,4 @@ class SecCrawler(object):
         Returns:
           None
         """
-        self._fetch_report(company_code, cik, priorto, count, '4')
+        self._fetch_report(company_code, cik, priorto, count, '4', output)
